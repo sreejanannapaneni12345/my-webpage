@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falling Names and Snowflakes</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: url('CM.jpeg') no-repeat center center;
+      background-size: cover;
+      overflow: hidden;
+      position: relative;
+      z-index: 0;
+    }
+
+    /* Snowflakes */
+    .snowflake {
+      position: absolute;
+      background: white;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      animation: snowfall linear infinite;
+    }
+
+    /* Flaky Snowflakes (styled) */
+    .flaky-snowflake {
+      position: absolute;
+      font-size: 1.5rem;
+      color: white;
+      opacity: 0.9;
+      animation: flakySnowfall linear infinite;
+    }
+
+    @keyframes snowfall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+
+    @keyframes flakySnowfall {
+      0% {
+        transform: translateY(-100px);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0.5;
+      }
+    }
+
+    /* Falling Names */
+    .falling-names {
+      font-size: 40px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(218, 165, 32, 1); /* Gold border */
+      position: absolute;
+      z-index: 1;
+      top: -50px;
+      animation: fallingNames linear infinite;
+    }
+
+    @keyframes fallingNames {
+      0% {
+        top: -50px;
+        opacity: 1;
+      }
+      100% {
+        top: 100vh;
+        opacity: 0.7;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    // Number of snowflakes and falling names
+    const numSnowflakes = 100;
+    const numFlakySnowflakes = 50; // Flaky styled snowflakes
+    const names = "Lalitha Sam Ben Sirisha Rafael Soumya Anu Sruthi Heather James Michael Matthew Karina Alexius".split(' ');
+    const container = document.body;
+
+    // Generate Regular Snowflakes
+    for (let i = 0; i < numSnowflakes; i++) {
+      const snowflake = document.createElement('div');
+      snowflake.className = 'snowflake';
+      snowflake.style.left = `${Math.random() * 100}vw`;
+      snowflake.style.animationDuration = `${Math.random() * 8 + 4}s`; // Random duration
+      snowflake.style.animationDelay = `${Math.random()}s`; // Random delay
+
+      container.appendChild(snowflake);
+    }
+
+    // Generate Flaky Styled Snowflakes
+    for (let i = 0; i < numFlakySnowflakes; i++) {
+      const flakySnowflake = document.createElement('div');
+      flakySnowflake.className = 'flaky-snowflake';
+      flakySnowflake.textContent = '❄'; // Snowflake symbol
+      flakySnowflake.style.left = `${Math.random() * 100}vw`;
+      flakySnowflake.style.animationDuration = `${Math.random() * 6 + 3}s`; // Random duration
+      flakySnowflake.style.animationDelay = `${Math.random()}s`; // Random delay
+
+      container.appendChild(flakySnowflake);
+    }
+
+    // Generate Falling Names
+    names.forEach(name => {
+      const fallingName = document.createElement('div');
+      fallingName.textContent = name;
+      fallingName.className = 'falling-names';
+      fallingName.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+      fallingName.style.animationDuration = `${Math.random() * 15 + 5}s`; // Random duration
+      fallingName.style.animationDelay = `${Math.random()}s`; // Random delay
+
+      container.appendChild(fallingName);
+    });
+  </script>
+ 
+</body>
+
+</html>
